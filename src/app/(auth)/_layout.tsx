@@ -1,5 +1,9 @@
-import { View } from 'react-native';
+import { Text, View } from 'react-native';
 
 export default function AuthLayout() {
-  return <View />;
+  return (
+    <View>
+      <Text>Auth Layout</Text>
+    </View>
+  );
 }
