@@ -1,3 +1,5 @@
+import { CurrentUser } from './models/user';
+
 interface CreateUserProps {
   username: string;
   email: string;
@@ -16,6 +18,8 @@ const userAdmin = {
 };
 
 class Api {
+  REQUEST_TIMER = 500;
+
   signIn(data: SignInProps) {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -29,7 +33,7 @@ class Api {
         } else {
           reject(new Error('No registered user.'));
         }
-      }, 500);
+      }, this.REQUEST_TIMER);
     });
   }
 
@@ -44,7 +48,15 @@ class Api {
           status: 'success',
           message: `Can't create an user in this app version. Please log in with 'admin@email.com' 'Admin@123' instead.`,
         });
-      }, 500);
+      }, this.REQUEST_TIMER);
+    });
+  }
+
+  getCurrentUser(): Promise<CurrentUser> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve(userAdmin);
+      }, this.REQUEST_TIMER);
     });
   }
 }

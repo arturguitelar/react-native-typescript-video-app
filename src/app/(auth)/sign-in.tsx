@@ -10,8 +10,8 @@ import { api } from '@/src/services/api';
 
 export default function SignIn() {
   const [form, setForm] = useState({
-    email: '',
-    password: '',
+    email: 'admin@email.com',
+    password: 'Admin@123',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
