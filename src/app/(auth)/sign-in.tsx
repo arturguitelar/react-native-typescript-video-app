@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Alert, Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FormField } from '@/src/components/FormField';
 import { CustomButton } from '@/src/components/CustomButton';
 import { images } from '@/constants';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
+import { api } from '@/src/services/api';
 
 export default function SignIn() {
   const [form, setForm] = useState({
@@ -15,9 +16,25 @@ export default function SignIn() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit = () => {
-    console.log('submetendo');
+  const submit = async () => {
+    if (!form.email || !form.password) {
+      Alert.alert('Error', 'Please fill in all the fields');
+      return;
+    }
+
     setIsSubmitting(true);
+
+    try {
+      const result = await api.signIn(form);
+
+      // set it to global state...
+
+      router.replace('/(tabs)/home');
+    } catch (error: any) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (

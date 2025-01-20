@@ -16,7 +16,6 @@ export default function SignUp() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitMessage, setSubmitMessage] = useState('');
 
   const submit = async () => {
     if (!form.username || !form.email || !form.password) {
@@ -30,8 +29,6 @@ export default function SignUp() {
       const result = await api.createUser(form);
 
       // set it to global state...
-
-      setSubmitMessage(result.message);
 
       router.replace('/(tabs)/home');
     } catch (error: any) {
