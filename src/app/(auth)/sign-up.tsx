@@ -1,11 +1,12 @@
 import { useState } from 'react';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Alert, Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { FormField } from '@/src/components/FormField';
 import { CustomButton } from '@/src/components/CustomButton';
 import { images } from '@/constants';
-import { Link } from 'expo-router';
+import { Link, router } from 'expo-router';
+import { api } from '@/src/services/api';
 
 export default function SignUp() {
   const [form, setForm] = useState({
@@ -15,10 +16,29 @@ export default function SignUp() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState('');
 
-  const submit = () => {
-    console.log('submetendo');
+  const submit = async () => {
+    if (!form.username || !form.email || !form.password) {
+      Alert.alert('Error', 'Please fill in all the fields');
+      return;
+    }
+
     setIsSubmitting(true);
+
+    try {
+      const result = await api.createUser(form);
+
+      // set it to global state...
+
+      setSubmitMessage(result.message);
+
+      router.replace('/(tabs)/home');
+    } catch (error: any) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -74,6 +94,13 @@ export default function SignUp() {
             >
               Sign In
             </Link>
+          </View>
+
+          <View className="justify-center pt-5 flex-row gap-2">
+            <Text className="text-lg text-gray-100 font-pregular">
+              Can't create an user in this app version. Please log in with user
+              "admin@email.com" and pass "Admin@123" instead.
+            </Text>
           </View>
         </View>
       </ScrollView>
