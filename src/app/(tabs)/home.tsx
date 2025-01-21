@@ -1,11 +1,21 @@
+import { useState } from 'react';
+import { FlatList, Image, RefreshControl, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 import { images } from '@/constants';
 import { EmptyListState } from '@/src/components/EmptyListState';
 import { SearchInput } from '@/src/components/SearchInput';
 import { Trending } from '@/src/components/Trending';
-import { FlatList, Image, Text, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Home() {
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    // recall videos -> if any new videos appeard
+    setRefreshing(false);
+  };
+
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
@@ -52,6 +62,9 @@ export default function Home() {
             subtitle="Be the first one to upload a video."
           />
         )}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
       ></FlatList>
     </SafeAreaView>
   );
