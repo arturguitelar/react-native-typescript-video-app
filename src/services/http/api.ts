@@ -22,7 +22,7 @@ const currentUser = {
   password: null,
 };
 
-class Api {
+export class Api {
   REQUEST_TIMER = 500;
 
   signIn(data: SignInProps): Promise<CurrentUser> {
@@ -58,5 +58,3 @@ class Api {
     });
   }
 }
-
-export const api = new Api();
