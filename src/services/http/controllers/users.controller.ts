@@ -1,6 +1,6 @@
 import { currentUser } from '@/mocks/users';
-import { REQUEST_TIMER } from './helpers/constants';
-import { CurrentUser } from './models/user';
+import { REQUEST_TIMER } from '../helpers/constants';
+import { CurrentUser } from '../models/user';
 
 interface CreateUserProps {
   username: string;

@@ -1,5 +1,5 @@
-import { REQUEST_TIMER } from './helpers/constants';
-import { CurrentUser } from './models/user';
+import { REQUEST_TIMER } from '../helpers/constants';
+import { CurrentUser } from '../models/user';
 
 import { userAdmin, currentUser } from '@/mocks/users';
 
