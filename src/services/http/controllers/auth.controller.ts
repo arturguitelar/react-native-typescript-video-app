@@ -8,7 +8,7 @@ interface SignInProps {
   password: string;
 }
 
-export class Auth {
+export class AuthController {
   signIn(data: SignInProps): Promise<CurrentUser> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {

@@ -8,7 +8,7 @@ interface CreateUserProps {
   password: string;
 }
 
-export class User {
+export class UserController {
   createUser(user: CreateUserProps): Promise<CurrentUser> {
     console.log(user);
 

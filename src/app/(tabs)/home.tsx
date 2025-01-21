@@ -1,28 +1,40 @@
 import { useState } from 'react';
-import { FlatList, Image, RefreshControl, Text, View } from 'react-native';
+import {
+  Alert,
+  FlatList,
+  Image,
+  RefreshControl,
+  Text,
+  View,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { images } from '@/constants';
 import { EmptyListState } from '@/src/components/EmptyListState';
 import { SearchInput } from '@/src/components/SearchInput';
 import { Trending } from '@/src/components/Trending';
+import { api } from '@/src/services/http/api';
+import { useApi } from '@/src/services/http/hooks/useApi';
+import { Post } from '@/src/services/http/models/post';
 
 export default function Home() {
+  const { data: posts, refetch } = useApi(api.posts.getAllPosts);
+
   const [refreshing, setRefreshing] = useState(false);
 
   const onRefresh = async () => {
     setRefreshing(true);
-    // recall videos -> if any new videos appeard
+    await refetch();
     setRefreshing(false);
   };
 
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[{ id: '1' }, { id: '2' }, { id: '3' }]}
+        data={posts as Post[]}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.id}</Text>
+          <Text className="text-3xl text-white">{item.title}</Text>
         )}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">

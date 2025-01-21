@@ -2,7 +2,7 @@ import video1 from './images/video1.png';
 import video2 from './images/video2.png';
 import video3 from './images/video3.png';
 
-export const videoList = [
+export const posts = [
   {
     id: '1',
     title: 'APANHEI DEMAIS NESSE AQUI 😂 | Dynasty Warriors: Origins | demo | gameplay pt-br',
