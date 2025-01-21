@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { api } from '../services/api';
-import { CurrentUser } from '../services/models/user';
+import { api } from '../services/http/api';
+import { CurrentUser } from '../services/http/models/user';
 
 interface IGlobalProvider {
   isLogged: boolean;
