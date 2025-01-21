@@ -3,8 +3,8 @@ import { api } from '../services/api';
 import { CurrentUser } from '../services/models/user';
 
 interface IGlobalProvider {
-  isLoggedIn: boolean;
-  setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
+  isLogged: boolean;
+  setIsLogged: React.Dispatch<React.SetStateAction<boolean>>;
   user: CurrentUser | null;
   setUser: React.Dispatch<React.SetStateAction<CurrentUser | null>>;
   isLoading: boolean;
@@ -18,7 +18,7 @@ export const useGlobalContext = () =>
 export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLogged, setIsLogged] = useState(false);
   const [user, setUser] = useState<CurrentUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -27,10 +27,10 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
       .getCurrentUser()
       .then((res) => {
         if (res) {
-          setIsLoggedIn(true);
+          setIsLogged(true);
           setUser(res);
         } else {
-          setIsLoggedIn(false);
+          setIsLogged(false);
           setUser(null);
         }
       })
@@ -41,8 +41,8 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   return (
     <GlobalContext.Provider
       value={{
-        isLoggedIn,
-        setIsLoggedIn,
+        isLogged,
+        setIsLogged,
         user,
         setUser,
         isLoading,

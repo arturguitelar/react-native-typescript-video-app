@@ -17,19 +17,22 @@ const userAdmin = {
   password: 'Admin@123',
 };
 
+const currentUser = {
+  ...userAdmin,
+  password: null,
+};
+
 class Api {
   REQUEST_TIMER = 500;
 
-  signIn(data: SignInProps) {
+  signIn(data: SignInProps): Promise<CurrentUser> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (
           data.email === userAdmin.email &&
           data.password === userAdmin.password
         ) {
-          resolve({
-            status: 'success',
-          });
+          resolve(currentUser);
         } else {
           reject(new Error('No registered user.'));
         }
@@ -37,17 +40,12 @@ class Api {
     });
   }
 
-  createUser(
-    user: CreateUserProps
-  ): Promise<{ status: string; message: string }> {
+  createUser(user: CreateUserProps): Promise<CurrentUser> {
     console.log(user);
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve({
-          status: 'success',
-          message: `Can't create an user in this app version. Please log in with 'admin@email.com' 'Admin@123' instead.`,
-        });
+        resolve(currentUser);
       }, this.REQUEST_TIMER);
     });
   }
@@ -55,7 +53,7 @@ class Api {
   getCurrentUser(): Promise<CurrentUser> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        resolve(userAdmin);
+        resolve(currentUser);
       }, this.REQUEST_TIMER);
     });
   }

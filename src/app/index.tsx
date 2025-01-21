@@ -1,13 +1,15 @@
 import { Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { router } from 'expo-router';
+import { Redirect, router } from 'expo-router';
 
 import { images } from '@/constants';
 import { CustomButton } from '../components/CustomButton';
 import { useGlobalContext } from '../context/GlobalProvider';
 
 export default function App() {
-  const {} = useGlobalContext();
+  const { isLoading, isLogged, user } = useGlobalContext();
+
+  if (!isLoading && isLogged) return <Redirect href="/(tabs)/home" />;
 
   return (
     <SafeAreaView className="bg-primary h-full">

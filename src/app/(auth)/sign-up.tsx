@@ -2,13 +2,18 @@ import { useState } from 'react';
 import { Alert, Image, ScrollView, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { useGlobalContext } from '@/src/context/GlobalProvider';
+
 import { FormField } from '@/src/components/FormField';
 import { CustomButton } from '@/src/components/CustomButton';
 import { images } from '@/constants';
 import { Link, router } from 'expo-router';
 import { api } from '@/src/services/api';
+import { CurrentUser } from '@/src/services/models/user';
 
 export default function SignUp() {
+  const { setUser, setIsLogged } = useGlobalContext();
+
   const [form, setForm] = useState({
     username: '',
     email: '',
@@ -28,7 +33,8 @@ export default function SignUp() {
     try {
       const result = await api.createUser(form);
 
-      // set it to global state...
+      setUser(result);
+      setIsLogged(true);
 
       router.replace('/(tabs)/home');
     } catch (error: any) {
