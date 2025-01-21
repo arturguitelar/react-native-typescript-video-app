@@ -37,7 +37,7 @@ export default function RootLayout() {
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         {/* <Stack.Screen name="/search/[query]" options={{ headerShown: false }} /> */}
       </Stack>
-      <StatusBar style="light" backgroundColor="#161622" />
+      <StatusBar style="light" />
     </GlobalProvider>
   );
 }
