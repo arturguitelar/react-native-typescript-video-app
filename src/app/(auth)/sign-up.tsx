@@ -7,7 +7,7 @@ import { useGlobalContext } from '@/src/context/GlobalProvider';
 
 import { FormField } from '@/src/components/FormField';
 import { CustomButton } from '@/src/components/CustomButton';
-import { http } from '@/src/services/http/http';
+import { api } from '@/src/services/http/api';
 import { images } from '@/constants';
 
 export default function SignUp() {
@@ -30,7 +30,7 @@ export default function SignUp() {
     setIsSubmitting(true);
 
     try {
-      const result = await http.createUser(form);
+      const result = await api.users.createUser(form);
 
       setUser(result);
       setIsLogged(true);

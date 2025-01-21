@@ -7,7 +7,7 @@ import { CustomButton } from '../components/CustomButton';
 import { useGlobalContext } from '../context/GlobalProvider';
 
 export default function App() {
-  const { isLoading, isLogged, user } = useGlobalContext();
+  const { isLoading, isLogged } = useGlobalContext();
 
   if (!isLoading && isLogged) return <Redirect href="/(tabs)/home" />;
 

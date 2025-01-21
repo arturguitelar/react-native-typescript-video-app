@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { http } from '../services/http/http';
+import { api } from '../services/http/api';
 import { CurrentUser } from '../services/http/models/user';
 
 interface IGlobalProvider {
@@ -23,7 +23,7 @@ export const GlobalProvider: React.FC<{ children: React.ReactNode }> = ({
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    http
+    api.users
       .getCurrentUser()
       .then((res) => {
         if (res) {
