@@ -1,6 +1,7 @@
 import video1 from './images/video1.png';
 import video2 from './images/video2.png';
 import video3 from './images/video3.png';
+import avatar from './images/profile.png';
 
 export const posts = [
   {
@@ -9,7 +10,10 @@ export const posts = [
     thumbnail: video1,
     videoUrl: 'https://www.youtube.com/watch?v=gGFUDM05Ow8',
     prompt: 'Dynasty Warriors: Origins | demo | gameplay pt-br',
-    creator: '1',
+    creator: {
+      username: 'Admin',
+      avatar: avatar
+    },
   },
   {
     id: '2',
@@ -17,7 +21,10 @@ export const posts = [
     thumbnail: video2,
     videoUrl: 'https://www.youtube.com/watch?v=xk4qq-6qNLM',
     prompt: 'Emblema da Coragem - Evento - Genshin Impact',
-    creator: '1',
+    creator: {
+      username: 'Admin',
+      avatar: avatar
+    },
   },
   {
     id: '3',
@@ -25,6 +32,9 @@ export const posts = [
     thumbnail: video3,
     videoUrl: 'https://www.youtube.com/watch?v=sjXfD7jfyJo',
     prompt: 'Soulslike - Ação - Anime',
-    creator: '1',
+    creator: {
+      username: 'Admin',
+      avatar: avatar
+    },
   },
 ];

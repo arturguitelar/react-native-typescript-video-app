@@ -16,9 +16,11 @@ import { Trending } from '@/src/components/Trending';
 import { api } from '@/src/services/http/api';
 import { useApi } from '@/src/services/http/hooks/useApi';
 import { Post } from '@/src/services/http/models/post';
+import { VideoCard } from '@/src/components/VideoCard';
 
 export default function Home() {
-  const { data: posts, refetch } = useApi(api.posts.getAllPosts);
+  const { data, refetch } = useApi(api.posts.getAllPosts);
+  const posts: Post[] = data;
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -31,11 +33,9 @@ export default function Home() {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={posts as Post[]}
+        data={posts}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => (
-          <Text className="text-3xl text-white">{item.title}</Text>
-        )}
+        renderItem={({ item }) => <VideoCard video={item} />}
         ListHeaderComponent={() => (
           <View className="my-6 px-4 space-y-6">
             <View className="justify-between items-start flex-row mb-6">
@@ -64,7 +64,7 @@ export default function Home() {
                 Latest Videos
               </Text>
 
-              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
+              <Trending posts={posts ?? []} />
             </View>
           </View>
         )}
