@@ -1,14 +1,16 @@
 import { images } from '@/constants';
+import { EmptyListState } from '@/src/components/EmptyListState';
 import { SearchInput } from '@/src/components/SearchInput';
+import { Trending } from '@/src/components/Trending';
 import { FlatList, Image, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Home() {
   return (
-    <SafeAreaView className="bg-primary">
+    <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={[{ id: 1 }, { id: 2 }, { id: 3 }]}
-        keyExtractor={(item) => item.id.toString()}
+        data={[{ id: '1' }, { id: '2' }, { id: '3' }]}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <Text className="text-3xl text-white">{item.id}</Text>
         )}
@@ -39,8 +41,16 @@ export default function Home() {
               <Text className="text-gray-100 text-lg font-pregular mb-3">
                 Latest Videos
               </Text>
+
+              <Trending posts={[{ id: 1 }, { id: 2 }, { id: 3 }] ?? []} />
             </View>
           </View>
+        )}
+        ListEmptyComponent={() => (
+          <EmptyListState
+            title="No Videos Found"
+            subtitle="Be the first one to upload a video."
+          />
         )}
       ></FlatList>
     </SafeAreaView>
