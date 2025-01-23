@@ -30,9 +30,13 @@ export class PostController {
   searchPosts(query: string): Promise<Post[]> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
-        const result = posts.filter((post) =>
-          post.title.toLowerCase().includes(query.toLocaleLowerCase())
-        );
+        const result = [] as Post[];
+
+        if (query) {
+          posts.filter((post) =>
+            post.title.toLowerCase().includes(query.toLowerCase())
+          );
+        }
 
         resolve(result);
       }, REQUEST_TIMER);
