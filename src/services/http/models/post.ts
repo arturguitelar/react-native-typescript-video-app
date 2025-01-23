@@ -1,6 +1,7 @@
 import { ImageSourcePropType } from 'react-native';
 
 export interface Creator {
+  id: string;
   username: string;
   avatar: ImageSourcePropType | undefined;
 }

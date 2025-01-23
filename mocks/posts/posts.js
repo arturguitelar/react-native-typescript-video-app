@@ -11,6 +11,7 @@ export const posts = [
     videoUrl: 'https://www.youtube.com/watch?v=gGFUDM05Ow8',
     prompt: 'Dynasty Warriors: Origins | demo | gameplay pt-br',
     creator: {
+      id: '1',
       username: 'Admin',
       avatar: avatar
     },
@@ -22,6 +23,7 @@ export const posts = [
     videoUrl: 'https://www.youtube.com/watch?v=xk4qq-6qNLM',
     prompt: 'Emblema da Coragem - Evento - Genshin Impact',
     creator: {
+      id: '1',
       username: 'Admin',
       avatar: avatar
     },
@@ -33,6 +35,7 @@ export const posts = [
     videoUrl: 'https://www.youtube.com/watch?v=sjXfD7jfyJo',
     prompt: 'Soulslike - Ação - Anime',
     creator: {
+      id: '1',
       username: 'Admin',
       avatar: avatar
     },

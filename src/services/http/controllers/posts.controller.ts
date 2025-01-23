@@ -42,4 +42,16 @@ export class PostController {
       }, REQUEST_TIMER);
     });
   }
+
+  getUserPosts(userId: string): Promise<Post[]> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (userId === posts[0].creator.id) {
+          resolve(posts);
+        } else {
+          reject(new Error('User error.'));
+        }
+      }, REQUEST_TIMER);
+    });
+  }
 }
