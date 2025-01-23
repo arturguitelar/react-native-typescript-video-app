@@ -2,6 +2,7 @@ import { View, Text, Image, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react';
 import { Post } from '../services/http/models/post';
 import { icons } from '@/constants';
+import { VideoPlayer } from './VideoPlayer';
 
 interface Props {
   video: Post;
@@ -49,20 +50,18 @@ export function VideoCard({ video }: Props) {
       </View>
 
       {play ? (
-        <></>
+        <VideoPlayer
+          videoPath={{ uri: videoUrl }}
+          containerStyles="relative justify-center items-center w-full h-60 rounded-xl bg-white/10 mt-3"
+          videoStyles="w-full h-60 rounded-xl"
+          onPlaybackStatusUpdate={(status) => {
+            // if(status.didJustFinish) todo: find another way
+            if (status.isLoaded) {
+              setPlay(false);
+            }
+          }}
+        />
       ) : (
-        // <Video
-        //   source={{ uri: video }}
-        //   className="w-full h-60 rounded-xl mt-3"
-        //   resizeMode={ResizeMode.CONTAIN}
-        //   useNativeControls
-        //   shouldPlay
-        //   onPlaybackStatusUpdate={(status) => {
-        //     if (status.didJustFinish) {
-        //       setPlay(false);
-        //     }
-        //   }}
-        // />
         <TouchableOpacity
           activeOpacity={0.7}
           onPress={() => setPlay(true)}
