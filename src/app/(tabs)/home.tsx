@@ -1,12 +1,5 @@
 import { useState } from 'react';
-import {
-  Alert,
-  FlatList,
-  Image,
-  RefreshControl,
-  Text,
-  View,
-} from 'react-native';
+import { FlatList, Image, RefreshControl, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { images } from '@/constants';
@@ -19,8 +12,9 @@ import { Post } from '@/src/services/http/models/post';
 import { VideoCard } from '@/src/components/VideoCard';
 
 export default function Home() {
-  const { data, refetch } = useApi(api.posts.getAllPosts);
-  const posts: Post[] = data;
+  const { data: posts, refetch } = useApi(api.posts.getAllPosts);
+
+  const { data: latestPosts } = useApi(api.posts.getLatestPosts);
 
   const [refreshing, setRefreshing] = useState(false);
 
@@ -33,7 +27,7 @@ export default function Home() {
   return (
     <SafeAreaView className="bg-primary h-full">
       <FlatList
-        data={posts}
+        data={posts as Post[]}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => <VideoCard video={item} />}
         ListHeaderComponent={() => (
@@ -64,7 +58,7 @@ export default function Home() {
                 Latest Videos
               </Text>
 
-              <Trending posts={posts ?? []} />
+              <Trending posts={(latestPosts as Post[]) ?? []} />
             </View>
           </View>
         )}
