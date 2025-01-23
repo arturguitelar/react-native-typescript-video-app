@@ -26,4 +26,16 @@ export class PostController {
       }, REQUEST_TIMER);
     });
   }
+
+  searchPosts(query: string): Promise<Post[]> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const result = posts.filter((post) =>
+          post.title.toLowerCase().includes(query.toLocaleLowerCase())
+        );
+
+        resolve(result);
+      }, REQUEST_TIMER);
+    });
+  }
 }

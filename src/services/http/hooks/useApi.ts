@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Alert } from 'react-native';
 
-export const useApi = (fn: () => {}) => {
+export const useApi = (fn: any) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
