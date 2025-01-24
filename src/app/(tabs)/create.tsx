@@ -11,7 +11,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { AVPlaybackSource } from 'expo-av';
 
-import * as DocumentPicker from 'expo-document-picker';
+import * as ImagePicker from 'expo-image-picker';
 
 import { FormField } from '@/src/components/FormField';
 import { VideoPlayer } from '@/src/components/VideoPlayer';
@@ -40,13 +40,10 @@ export default function Create() {
   });
 
   const openPicker = async (selectType: 'video' | 'image') => {
-    const type =
-      selectType === 'image'
-        ? ['image/png', 'image/jpg']
-        : ['video/mp4', 'video/gif'];
-
-    const result = await DocumentPicker.getDocumentAsync({
-      type,
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: selectType === 'image' ? ['images'] : ['videos'],
+      aspect: [4, 3],
+      quality: 1,
     });
 
     if (!result.canceled) {
