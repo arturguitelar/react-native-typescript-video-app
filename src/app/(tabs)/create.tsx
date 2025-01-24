@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import {
+  Alert,
   Image,
   ImageSourcePropType,
   ScrollView,
@@ -8,12 +9,17 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { AVPlaybackSource } from 'expo-av';
+
+import * as DocumentPicker from 'expo-document-picker';
 
 import { FormField } from '@/src/components/FormField';
 import { VideoPlayer } from '@/src/components/VideoPlayer';
-import { icons } from '@/constants';
-import { AVPlaybackSource } from 'expo-av';
 import { CustomButton } from '@/src/components/CustomButton';
+import { icons } from '@/constants';
+import { router } from 'expo-router';
+import { api } from '@/src/services/http/api';
+import { useGlobalContext } from '@/src/context/GlobalProvider';
 
 interface FormProps {
   title: string;
@@ -23,6 +29,7 @@ interface FormProps {
 }
 
 export default function Create() {
+  const { user } = useGlobalContext();
   const [uploading, setUploading] = useState(false);
 
   const [form, setForm] = useState<FormProps>({
@@ -32,9 +39,59 @@ export default function Create() {
     prompt: '',
   });
 
-  const openPicker = async (selectType: 'video' | 'image') => {};
+  const openPicker = async (selectType: 'video' | 'image') => {
+    const type =
+      selectType === 'image'
+        ? ['image/png', 'image/jpg']
+        : ['video/mp4', 'video/gif'];
 
-  const submit = () => {};
+    const result = await DocumentPicker.getDocumentAsync({
+      type,
+    });
+
+    if (!result.canceled) {
+      if (selectType === 'image') {
+        setForm({ ...form, thumbnail: result.assets[0] });
+      }
+
+      if (selectType === 'video') {
+        setForm({ ...form, video: result.assets[0] });
+      }
+    } else {
+      setTimeout(() => {
+        Alert.alert('Document picked', JSON.stringify(result, null, 2));
+      }, 100);
+    }
+  };
+
+  const submit = async () => {
+    /** fake data just for test */
+    // setForm({
+    //   title: 'Fake title',
+    //   video: { data: 'data video here' },
+    //   thumbnail: { data: 'data thumbail here' },
+    //   prompt: 'some funny prompt here',
+    // });
+
+    if (!form.prompt || !form.title || !form.thumbnail || !form.video) {
+      return Alert.alert('Please fill in all the fields');
+    }
+
+    setUploading(true);
+
+    try {
+      await api.posts.createPost({ ...form, userId: user?.id });
+
+      Alert.alert('Success', 'Post uploaded successfully');
+      router.push('/home');
+    } catch (error: any) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setForm({ title: '', video: null, thumbnail: null, prompt: '' });
+
+      setUploading(false);
+    }
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">
@@ -63,7 +120,6 @@ export default function Create() {
                 source={{ uri: 'form.video.uri' }}
                 containerStyles="w-full h-64 rounded-2xl bg-white/10"
                 videoStyles="w-full h-full rounded-2xl"
-                // TODO: isLooping
               />
             ) : (
               <View className="w-full h-40 px-4 bg-black-100 rounded-2xl justify-center items-center">
