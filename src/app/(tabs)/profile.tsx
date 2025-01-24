@@ -1,16 +1,14 @@
-import { useEffect } from 'react';
-import { FlatList, Image, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Image, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Link, useLocalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 
 import { useGlobalContext } from '@/src/context/GlobalProvider';
 import { useApi } from '@/src/services/http/hooks/useApi';
 import { api } from '@/src/services/http/api';
 import { EmptyListState } from '@/src/components/EmptyListState';
-import { SearchInput } from '@/src/components/SearchInput';
 import { Post } from '@/src/services/http/models/post';
 import { VideoCard } from '@/src/components/VideoCard';
-import { icons, images } from '@/constants';
+import { icons } from '@/constants';
 import { InfoBox } from '@/src/components/InfoBox';
 
 export default function Profile() {
@@ -19,7 +17,13 @@ export default function Profile() {
     api.posts.getUserPosts(user?.id as string)
   );
 
-  const logout = () => {};
+  const logout = async () => {
+    await api.auth.signOut();
+    setUser(null);
+    setIsLogged(false);
+
+    router.replace('/(auth)/sign-in');
+  };
 
   return (
     <SafeAreaView className="bg-primary h-full">

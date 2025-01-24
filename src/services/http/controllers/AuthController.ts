@@ -23,4 +23,12 @@ export class AuthController {
       }, REQUEST_TIMER);
     });
   }
+
+  signOut(): Promise<{ sessionStatus: string }> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ sessionStatus: 'finished' });
+      }, REQUEST_TIMER);
+    });
+  }
 }
