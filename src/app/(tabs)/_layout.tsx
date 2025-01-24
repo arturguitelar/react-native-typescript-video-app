@@ -76,11 +76,6 @@ const tabsScreens = [
     icon: icons.home,
   },
   {
-    screenName: 'bookmark',
-    title: 'Bookmark',
-    icon: icons.bookmark,
-  },
-  {
     screenName: 'create',
     title: 'Create',
     icon: icons.plus,
@@ -89,5 +84,10 @@ const tabsScreens = [
     screenName: 'profile',
     title: 'Profile',
     icon: icons.profile,
+  },
+  {
+    screenName: 'bookmark',
+    title: 'Saved',
+    icon: icons.bookmark,
   },
 ];

@@ -3,7 +3,13 @@ import React, { useState } from 'react';
 import { icons } from '@/constants';
 import { router, usePathname } from 'expo-router';
 
-export function SearchInput({ initialQuery }: { initialQuery: string }) {
+export function SearchInput({
+  initialQuery,
+  placeholder,
+}: {
+  initialQuery?: string;
+  placeholder?: string;
+}) {
   const pathname = usePathname();
   const [query, setQuery] = useState(initialQuery || '');
 
@@ -12,7 +18,7 @@ export function SearchInput({ initialQuery }: { initialQuery: string }) {
       <TextInput
         className="text-base mt-0.5 text-white flex-1 font-pregular"
         value={query}
-        placeholder="Search for a video topic"
+        placeholder={placeholder ?? 'Search for a video topic'}
         placeholderTextColor="#CDCDE0"
         onChangeText={(e) => setQuery(e)}
       />

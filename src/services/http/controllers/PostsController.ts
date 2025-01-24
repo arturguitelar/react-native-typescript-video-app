@@ -35,6 +35,18 @@ export class PostController {
     });
   }
 
+  getSavedPosts(): Promise<Post[]> {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (posts.length) {
+          resolve(posts);
+        } else {
+          reject(new Error('No registered posts.'));
+        }
+      }, REQUEST_TIMER);
+    });
+  }
+
   searchPosts(query: string): Promise<Post[]> {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
