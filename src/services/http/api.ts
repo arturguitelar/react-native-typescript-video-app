@@ -1,6 +1,6 @@
-import { AuthController } from './controllers/auth.controller';
-import { PostController } from './controllers/posts.controller';
-import { UserController } from './controllers/users.controller';
+import { AuthController } from './controllers/AuthController';
+import { PostController } from './controllers/PostsController';
+import { UserController } from './controllers/UsersController';
 
 export const api = {
   auth: new AuthController(),
