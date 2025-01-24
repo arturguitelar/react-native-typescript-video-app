@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native';
 import React from 'react';
-import { ResizeMode, Video } from 'expo-av';
+import { AVPlaybackSource, ResizeMode, Video } from 'expo-av';
 
 interface Props {
-  videoPath: any;
+  source: AVPlaybackSource | undefined;
   containerStyles?: string;
   videoStyles?: string;
   resizeMode?: any;
@@ -11,7 +11,7 @@ interface Props {
 }
 
 export function VideoPlayer({
-  videoPath,
+  source,
   containerStyles,
   videoStyles,
   resizeMode,
@@ -21,12 +21,12 @@ export function VideoPlayer({
     containerStyles ??
     'relative justify-center items-center w-52 h-72 rounded-[35px] mt-3 bg-white/10';
 
-  const vS = videoStyles ?? 'w-52 h-72 rounded-[35px] mt-3 bg-white/10';
+  const vS = videoStyles ?? 'w-full h-full rounded-[35px]';
 
   return (
     <View className={cS}>
       <Video
-        source={{ uri: videoPath }}
+        source={source}
         className={vS}
         resizeMode={resizeMode ?? ResizeMode.CONTAIN}
         useNativeControls

@@ -51,14 +51,11 @@ export function VideoCard({ video }: Props) {
 
       {play ? (
         <VideoPlayer
-          videoPath={{ uri: videoUrl }}
+          source={{ uri: videoUrl }}
           containerStyles="relative justify-center items-center w-full h-60 rounded-xl bg-white/10 mt-3"
           videoStyles="w-full h-60 rounded-xl"
           onPlaybackStatusUpdate={(status) => {
-            // if(status.didJustFinish) todo: find another way
-            if (status.isLoaded) {
-              setPlay(false);
-            }
+            // if(status.didJustFinish) setPlay(false); todo: find another way
           }}
         />
       ) : (

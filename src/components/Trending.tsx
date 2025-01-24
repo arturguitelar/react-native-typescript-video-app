@@ -44,12 +44,9 @@ const TrendingItem = ({ activeItem, item }: any) => {
     >
       {play ? (
         <VideoPlayer
-          videoPath={{ uri: item.videoUrl }}
+          source={{ uri: item.videoUrl }}
           onPlaybackStatusUpdate={(status) => {
-            // if(status.didJustFinish) todo: find another way
-            if (status.isLoaded) {
-              setPlay(false);
-            }
+            // if(status.didJustFinish) setPlay(false); todo: find another way
           }}
         />
       ) : (
