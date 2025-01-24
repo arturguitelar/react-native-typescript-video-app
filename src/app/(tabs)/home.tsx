@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FlatList, Image, RefreshControl, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { images } from '@/constants';
+import { useGlobalContext } from '@/src/context/GlobalProvider';
 import { EmptyListState } from '@/src/components/EmptyListState';
 import { SearchInput } from '@/src/components/SearchInput';
 import { Trending } from '@/src/components/Trending';
@@ -10,8 +10,11 @@ import { api } from '@/src/services/http/api';
 import { useApi } from '@/src/services/http/hooks/useApi';
 import { Post } from '@/src/services/http/models/post';
 import { VideoCard } from '@/src/components/VideoCard';
+import { images } from '@/constants';
 
 export default function Home() {
+  const { user } = useGlobalContext();
+
   const { data: posts, refetch } = useApi(api.posts.getAllPosts);
 
   const { data: latestPosts } = useApi(api.posts.getLatestPosts);
@@ -38,7 +41,7 @@ export default function Home() {
                   Wellcome Back
                 </Text>
                 <Text className="text-2xl font-psemibold text-white">
-                  Admin
+                  {user?.username}
                 </Text>
               </View>
 
@@ -51,7 +54,7 @@ export default function Home() {
               </View>
             </View>
 
-            <SearchInput />
+            <SearchInput initialQuery="" />
 
             <View className="w-full flex-1 pt-5 pb-8">
               <Text className="text-gray-100 text-lg font-pregular mb-3">
