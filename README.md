@@ -1,4 +1,30 @@
-# Welcome to your Expo app 👋
+# React Native video app
+
+Based on the video _"React Native Course for Beginners in 2024 | Build a Full Stack React Native App"_ from **JavaScript Mastery** youtube channel.
+
+[Link to video tutorial](https://www.youtube.com/watch?v=ZBCUegTZF7M).
+
+## Some differences
+
+- This project is create using earlier libs
+- I created a "fake api" to use instead Appwritter, just to make things easier and more centralized. So create users or posts doens't really works. It's just fake local data. 😅
+- Using typescript instead javascript.
+- The videoplayer doesn't works with youtube raw urls but still there. I'll try to build other sollution in the future.
+- Maybe I'll try to take advantage of Expo's flexibility to create a web version of this app. Maybe not. 😂
+
+## Some printscreens 😁
+
+![screenshot 1](/printscreens/app01.png)
+![screenshot 2](/printscreens/app02.png)
+![screenshot 3](/printscreens/app03.png)
+![screenshot 4](/printscreens/app04.png)
+![screenshot 5](/printscreens/app05.png)
+![screenshot 6](/printscreens/app06.png)
+![screenshot 7](/printscreens/app07.png)
+
+<br/>
+
+## Welcome to your Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
